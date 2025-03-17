@@ -1,13 +1,16 @@
 from fastapi import FastAPI
+
+import uvicorn 
+
 app = FastAPI()
-@app.on_event("startup")
-async def startup_event():
-    print("Server started")
-@app.get("/health")
-async def health_check():
-    return {"message": "Hello, world!"}
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello, World!"}
+
+@app.get("/goodmorning/{name}")
+def say_good_morning(name: str):
+    return {"message": f"Good morning, {name}!"}
+
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
