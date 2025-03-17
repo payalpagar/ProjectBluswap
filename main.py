@@ -9,7 +9,7 @@ def read_root():
 
 @app.get("/goodmorning/{name}")
 def say_good_morning(name: str):
-    return {"message": f"Very very Bad Good Morning, {name}!"}
+    return {"message": f"Very very very Bad Good Morning, {name}!"}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
