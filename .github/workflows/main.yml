@@ -16,13 +16,12 @@ jobs:
       - name: Set up SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ action }}
+          ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}  # Ensure the secret name matches!
 
       - name: Deploy to EC2 instance
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
+         
             cd /path/to/your/project
             git pull origin main
-            # Add any other commands here, such as restarting services
             sudo systemctl restart your-service
           EOF
